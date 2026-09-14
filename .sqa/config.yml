@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: fix/updatego
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/john-shepherdson/github-markup-scanner:
+      branch: main
+      repo: https://github.com/john-shepherdson/github-markup-scanner
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/john-shepherdson/github-markup-scanner git:
+        commands:
+        - /usr/bin/env sh .sqa/script.thunder_content_roc.sh
+        container: qc.acc_cherry_driven_iguana
+  QC.Doc:
+    repos:
+      github.com/john-shepherdson/github-markup-scanner find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.cayenne_grateful_tarantula.sh
+        container: qc.doc_seafoam_tough_seal
+      github.com/john-shepherdson/github-markup-scanner git:
+        commands:
+        - /usr/bin/env sh .sqa/script.malachite_peaceful_hippopotamus.sh
+        container: qc.doc_dawn_focused_orangutan
+      github.com/john-shepherdson/github-markup-scanner markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.grape_hopeful_serval.sh
+        container: qc.doc_grege_forgiving_wasp
+  QC.Lic:
+    repos:
+      github.com/john-shepherdson/github-markup-scanner licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.avocado_meticulous_viper.sh
+        container: qc.lic_aquamarine_logical_echidna
+  QC.Met:
+    repos:
+      github.com/john-shepherdson/github-markup-scanner cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.flint_timid_cheetah.sh
+        container: qc.met_orange_perky_tapir
+  QC.Sty:
+    repos:
+      github.com/john-shepherdson/github-markup-scanner checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.flint_honest_dhole.sh
+        container: qc.sty_sepia_cranky_osprey
+      github.com/john-shepherdson/github-markup-scanner jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.fern_sincere_quoll.sh
+        container: qc.sty_chartreuse_cranky_rhinoceros
+  QC.Ver:
+    repos:
+      github.com/john-shepherdson/github-markup-scanner get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.coral_humble_turtle.sh
+        container: qc.ver_arctic_patient_barracuda
+timeout: 5400
